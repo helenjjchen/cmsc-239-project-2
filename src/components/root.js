@@ -20,7 +20,7 @@ class RootComponent extends React.Component {
   }
 
   componentWillMount() {
-    csv('data/sample-data.csv')
+    csv('data/chicago_data.csv')
       .then(data => {
         this.setState({
           data,
