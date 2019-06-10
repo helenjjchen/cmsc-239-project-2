@@ -36,7 +36,7 @@ class RootComponent extends React.Component {
     }
     return (
       <div className="relative">
-        <h1> Hello Explainable!</h1>
+        <h1> Airbnb in Chicago </h1>
         <div>{`The example data was loaded! There are ${data.length} rows`}</div>
         <ExampleChart data={data}/>
         <div>{longBlock}</div>
