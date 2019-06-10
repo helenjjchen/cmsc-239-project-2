@@ -1,14 +1,14 @@
 /* EDIT ANYTHING YOU WANT */
 .title {
   color: black;
-  font-family: Roboto-Black;
+  font-family: Montserrat-Bold;
   font-size: 36px;
   font-weight: bold;
 }
 
 .subtitle {
   color: black;
-  font-family: Roboto-Black;
+  font-family: Montserrat-Bold;
   font-size: 12px;
   font-weight: semi-bold;
 }
@@ -45,7 +45,7 @@
 }
 
 .state-hex-label {
-  font-family: Roboto;
+  font-family: Montserrat;
   font-size: 10px;
   pointer-events: none;
 }
