@@ -20,7 +20,7 @@ class RootComponent extends React.Component {
   }
 
   componentWillMount() {
-    csv('data/sample-data.csv')
+    csv('data/chicago_data.csv')
       .then(data => {
         this.setState({
           data,
@@ -37,7 +37,7 @@ class RootComponent extends React.Component {
     return (
       <div className="relative">
         <h1> Airbnb in Chicago </h1>
-        <div>{`The example data was loaded! There are ${data.length} rows`}</div>
+        <div class="text">{`The example data was loaded! There are ${data.length} rows`}</div>
         <ExampleChart data={data}/>
         <div>{longBlock}</div>
         <ExampleChart data={data}/>
