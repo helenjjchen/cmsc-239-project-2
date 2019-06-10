@@ -1,14 +1,14 @@
 /* EDIT ANYTHING YOU WANT */
 .title {
   color: black;
-  font-family: Montserrat-Bold;
+  font-family: Montserrat;
   font-size: 36px;
   font-weight: bold;
 }
 
 .subtitle {
   color: black;
-  font-family: Montserrat-Bold;
+  font-family: Montserrat;
   font-size: 12px;
   font-weight: semi-bold;
 }
@@ -102,9 +102,9 @@
 
 h1 {
   color: #f16664;
-  font-family: Montserrat-Bold;
+  font-family: Montserrat;
   font-size: 48px;
-  font-weight: semi-bold;
+  font-weight: bold;
   vertical-align: top;
   margin-left: auto;
   margin-right: auto;
