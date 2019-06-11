@@ -2,6 +2,8 @@ import React from 'react';
 import ReactMapGL from 'react-map-gl';
 import {csv} from 'd3-fetch';
 import ExampleChart from './example-chart';
+import StackedBar from './stacked-bar';
+// import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
 
 const longBlock = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -50,7 +52,8 @@ class RootComponent extends React.Component {
           }}
         />
         <h1> Airbnb in Chicago </h1>
-        <div class="text">{`The example data was loaded! There are ${data.length} rows`}</div>
+        <div className="text">{`The example data was loaded! There are ${data.length} rows`}</div>
+        <StackedBar data={data}/>
         <ExampleChart data={data}/>
         <div>{longBlock}</div>
         <ExampleChart data={data}/>
