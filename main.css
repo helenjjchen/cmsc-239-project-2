@@ -10,7 +10,7 @@
   color: black;
   font-family: Montserrat;
   font-size: 12px;
-  font-weight: semi-bold;
+  font-weight: 400;
 }
 
 .max-width-1000 {
@@ -94,7 +94,7 @@
   background: black;
   border-radius: 4px;
   color: white;
-  font-family: sans-serif;
+  font-family: Montserrat;
   font-size: 10px;
   padding: 6px;
   text-transform: uppercase;
