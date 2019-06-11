@@ -112,3 +112,15 @@ h1 {
   margin-top: 30px;
   text-align: center;
 }
+
+.text {
+  color: #000000;
+  font-family: Montserrat;
+  font-size: 14px;
+}
+
+div {
+  margin-bottom: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+}

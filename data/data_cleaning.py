@@ -40,7 +40,7 @@ if __name__ == '__main__':
     df1['host_is_superhost'].replace('t', 1, inplace=True)
     df1['host_is_superhost'].replace('f', 0, inplace=True)
 
-    print len(df1['neighbourhood_cleansed'].unique())
+    print len(df1['first_year'].unique())
 
     df1.to_csv('chicago_data.csv', index=False)
 
