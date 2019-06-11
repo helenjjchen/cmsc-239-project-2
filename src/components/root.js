@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactMapGL from 'react-map-gl';
 import {csv} from 'd3-fetch';
 import ExampleChart from './example-chart';
 
@@ -36,6 +37,18 @@ class RootComponent extends React.Component {
     }
     return (
       <div className="relative">
+        <ReactMapGL
+          width={400}
+          height={400}
+          latitude={41.8781}
+          longitude={-87.6298}
+          zoom={8}
+          mapboxApiAccessToken={'pk.eyJ1IjoiMDAxd3dhbmciLCJhIjoiY2p3cTI3cGR6MWZwZjRhcDhnajliMTZ3ZSJ9.fgblubMtl1JgN31RQUw13A'}
+          onViewportChange={(viewport) => {
+            const {width, height, latitude, longitude, zoom} = viewport;
+            // Optionally call `setState` and use the state to update the map.
+          }}
+        />
         <h1> Airbnb in Chicago </h1>
         <div>{`The example data was loaded! There are ${data.length} rows`}</div>
         <ExampleChart data={data}/>
