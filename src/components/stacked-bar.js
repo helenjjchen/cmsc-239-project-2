@@ -16,7 +16,7 @@ export default class StackedBar extends Component {
   constructor() {
     super();
     this.state = {
-      selectedHood: 2
+      selectedHood: false
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
   }
@@ -79,9 +79,9 @@ export default class StackedBar extends Component {
             data={barsData[roomTypes[2]]}
             onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}/>
           {selectedHood !== false && <Hint value={selectedHood}>
-            <div style={{background: 'blue'}}>
-              <h3>{selectedHood.x}</h3>
-              <h3>{`Wow there are ${selectedHood.y} listings`}</h3>
+            <div>
+              <div className={'hint-text'}>{selectedHood.x}</div>
+              <div className={'hint-text'}>{`Wow there are ${selectedHood.y} listings`}</div>
             </div>
           </Hint>}
           <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>

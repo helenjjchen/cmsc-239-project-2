@@ -91,13 +91,14 @@
 }
 
 .rv-hint {
-  background: black;
-  border-radius: 4px;
+  background: lightgray;
+  border-radius: 10px;
   color: white;
   font-family: Montserrat;
   font-size: 10px;
-  padding: 6px;
+  padding: 2px;
   text-transform: uppercase;
+  height: 100px;
 }
 
 h1 {
@@ -119,8 +120,19 @@ h1 {
   font-size: 14px;
 }
 
+.hint-text {
+  margin-top: 10px;
+  color: #000000;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 14px;
+}
+
 div {
-  margin-bottom: 50px;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.bottom-margin {
+  margin-bottom: 50px;
 }

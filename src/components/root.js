@@ -52,8 +52,10 @@ class RootComponent extends React.Component {
           }}
         />
         <h1> Airbnb in Chicago </h1>
-        <div className="text">{`The example data was loaded! There are ${data.length} rows`}</div>
-        <StackedBar data={data}/>
+        <div className={"text bottom-margin"}>{`The example data was loaded! There are ${data.length} rows`}</div>
+        <div className={"bottom-margin"}>
+          <StackedBar data={data}/>
+        </div>
         <ExampleChart data={data}/>
         <div>{longBlock}</div>
         <ExampleChart data={data}/>
