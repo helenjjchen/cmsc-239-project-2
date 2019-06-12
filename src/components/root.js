@@ -3,6 +3,7 @@ import {csv} from 'd3-fetch';
 import StackedBar from './stacked-bar';
 import PriceBar from './price-bar';
 import AirbnbMap from './map';
+import RatingsHist from './ratings-hist';
 
 const longBlock = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -51,6 +52,7 @@ class RootComponent extends React.Component {
         </div>
         <div>{longBlock}</div>
         <PriceBar data={data}/>
+        <RatingsHist data={data}/>
         <div>{longBlock}</div>
       </div>
     );

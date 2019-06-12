@@ -1,25 +1,21 @@
 import React, {Component} from 'react';
 
-import {Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-import {groupBy, formatPriceBarData, getMedianData} from '../utils';
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalRectSeries, VerticalBarSeries, Hint} from 'react-vis';
+import {  groupByVal, fixDict} from '../utils';
 import Select from 'react-select';
 
-export default class PriceBar extends Component {
+export default class RatingsHist extends Component {
   constructor(props) {
     super(props);
     const {data} = this.props;
-    const groupHoodData = groupBy(data, 'neighbourhood_cleansed');
-    const initRoomTypes = ['Shared room', 'Private room', 'Entire home/apt'];
-    const medianPriceData = getMedianData(groupHoodData);
-    const dropdownOptions = Object.keys(groupHoodData).map((hoodName) => {
+    const groupHoodRatingsData = groupByVal(data);
+    const dropdownOptions = Object.keys(groupHoodRatingsData).map((hoodName) => {
       const entry = {value: hoodName, label: hoodName};
       return entry;
     });
     this.state = {
-      gHoodData: groupHoodData,
+      gHoodData: groupHoodRatingsData,
       dropdown: dropdownOptions,
-      roomTypes: initRoomTypes,
-      priceData: medianPriceData,
       selectedHood: 'Avondale',
       selectedBar: false
     };
@@ -47,22 +43,21 @@ export default class PriceBar extends Component {
   }
 
   render() {
-    const {gHoodData, dropdown, roomTypes, priceData, selectedHood, selectedBar} = this.state;
-    const selectedPriceData = formatPriceBarData(priceData[selectedHood]);
+    const {gHoodData, selectedHood, selectedBar, dropdown} = this.state;
+    const selectedHistData = fixDict(gHoodData[selectedHood]);
     return (
       <div>
-        <h2>{selectedHood}: Median Price by Room Type </h2>
+        <h2>{selectedHood}: Distribution of ratings </h2>
         <XYPlot
-          xType="ordinal"
           stackBy="y"
-          width={400}
-          height={350}
-          margin={{left: 50, right: 50, bottom: 100}}
-          >
+          width={800}
+          height={450}
+          margin={{bottom: 100}}
+        >
           <HorizontalGridLines />
-          <VerticalBarSeries
+          <VerticalRectSeries
             animation
-            data={selectedPriceData}
+            data={selectedHistData}
             onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
             onSeriesMouseOut={() => this.handleMouseOut()}/>
           {selectedBar !== false && <Hint value={selectedBar} className="smallHint">
@@ -73,8 +68,8 @@ export default class PriceBar extends Component {
               </div>
             </div>
           </Hint>}
-          <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>
-          <YAxis title="Median Price (USD)" style={{fontFamily: 'Montserrat'}}/>
+          <XAxis tickLabelAngle={-45} title="Rating out of 100" style={{fontFamily: 'Montserrat'}}/>
+          <YAxis style={{fontFamily: 'Montserrat'}}/>
         </XYPlot>
         <div className="dropdown-menu">
           <Select
