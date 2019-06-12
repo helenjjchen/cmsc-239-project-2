@@ -4,6 +4,8 @@ import {csv} from 'd3-fetch';
 import ExampleChart from './example-chart';
 import StackedBar from './stacked-bar';
 // import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
+import {formatLngLat} from '../utils'; // temporary
+//var HeatmapOverlay = require('react-map-gl-heatmap-overlay');
 
 const longBlock = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -34,6 +36,9 @@ class RootComponent extends React.Component {
 
   render() {
     const {loading, data} = this.state;
+    // console.log(data);
+    const test = formatLngLat(data);
+    // console.log(test);
     if (loading) {
       return <h1>LOADING</h1>;
     }

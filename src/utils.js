@@ -66,3 +66,18 @@ export function formatBarData(roomTypes, roomData) {
   }, {});
   return barsData;
 }
+
+// formats data into [{longitude, latitude}] required for HeatMapOverlay
+export function formatLngLat(data) {
+  if (data === null) {
+    return data;
+  }
+  const dataCopy = data.slice(0)
+  const lngLatData = dataCopy.map(row => {
+    const lng = Number(row.longitude);
+    const lat = Number(row.latitude);
+    return {longitude: lng, latitude: lat};
+  });
+  console.log(lngLatData);
+  return lngLatData;
+}
