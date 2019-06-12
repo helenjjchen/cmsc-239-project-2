@@ -99,6 +99,7 @@
   padding: 2px;
   text-transform: uppercase;
   height: 100px;
+  width: 250px;
 }
 
 h1 {
@@ -112,6 +113,8 @@ h1 {
   width: 100%;
   margin-top: 30px;
   text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .text {

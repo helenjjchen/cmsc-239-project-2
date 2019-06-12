@@ -41,6 +41,8 @@ if __name__ == '__main__':
     df1['host_is_superhost'].replace('f', 0, inplace=True)
 
     print len(df1['first_year'].unique())
+    print df1['room_type'].unique()
+
 
     df1.to_csv('chicago_data.csv', index=False)
 

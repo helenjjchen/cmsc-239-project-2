@@ -39,6 +39,8 @@ class RootComponent extends React.Component {
     }
     return (
       <div className="relative">
+
+        <h1> Airbnb in Chicago </h1>
         <ReactMapGL
           width={400}
           height={400}
@@ -51,12 +53,10 @@ class RootComponent extends React.Component {
             // Optionally call `setState` and use the state to update the map.
           }}
         />
-        <h1> Airbnb in Chicago </h1>
         <div className={"text bottom-margin"}>{`The example data was loaded! There are ${data.length} rows`}</div>
-        <div className={"bottom-margin"}>
+        <div className={"bottom-margin center"}>
           <StackedBar data={data}/>
         </div>
-        <ExampleChart data={data}/>
         <div>{longBlock}</div>
         <ExampleChart data={data}/>
         <div>{longBlock}</div>
