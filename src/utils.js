@@ -53,7 +53,7 @@ export function getRoomDataForHoods(gHoodData, hoodData) {
 }
 
 // formats data into barseries required format [{x: neighbourhood, y: #}, ...]
-export function formatBarData(roomTypes, roomData) {
+export function formatStackBarData(roomTypes, roomData) {
   const barsData = roomTypes.reduce((barData, roomType) => {
     barData[roomType] = Object.keys(roomData).map(hood => {
       const roomTypeData = roomData[hood][roomType];
@@ -65,4 +65,46 @@ export function formatBarData(roomTypes, roomData) {
     return barData;
   }, {});
   return barsData;
+}
+
+export function formatPriceBarData(hoodPriceData) {
+  return Object.keys(hoodPriceData).sort().map((roomType) => {
+    const entry = {};
+    entry.x = roomType;
+    entry.y = hoodPriceData[roomType];
+    return entry;
+  });
+}
+
+export function getMedianData(groupHoodData) {
+  const initRoomTypes = ['Shared room', 'Private room', 'Entire home/apt'];
+  const medianData = Object.keys(groupHoodData).reduce((hoods, hoodName) => {
+    const initData = groupBy(groupHoodData[hoodName], 'room_type');
+    const medianPriceEntry = initRoomTypes.reduce((acc, roomType) => {
+      const listings = initData[roomType];
+      acc[roomType] = (typeof listings !== 'undefined') ? getMedPriceForListings(listings) : 0;
+      return acc;
+    }, {});
+    hoods[hoodName] = medianPriceEntry;
+    return hoods;
+  }, {});
+  return medianData;
+}
+
+// gets the median price from an array of listing objects
+export function getMedPriceForListings(listings) {
+  const priceArray = listings.map((listing) => {
+    return Number(listing.price);
+  });
+  return median(priceArray);
+}
+
+// finds median value given an array of values (numbers)
+function median(values) {
+  const len = values.length;
+  values = values.sort();
+  if (len % 2 === 0) {
+    return (values[len / 2 - 1] + values[len / 2]) / 2;
+  }
+  return values[(len - 1) / 2];
 }
