@@ -43,6 +43,4 @@ if __name__ == '__main__':
     print len(df1['first_year'].unique())
     print df1['room_type'].unique()
 
-
     df1.to_csv('chicago_data.csv', index=False)
-
