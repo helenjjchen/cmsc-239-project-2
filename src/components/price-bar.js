@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-import {XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-import {getTopHoodsByTotal, groupBy, getRoomDataForHoods, formatPriceBarData, getTopHoodsBy, getMedianData} from '../utils';
+import {Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
+import {groupBy, formatPriceBarData, getMedianData} from '../utils';
 import Select from 'react-select';
 
 export default class PriceBar extends Component {
@@ -11,13 +11,33 @@ export default class PriceBar extends Component {
     const groupHoodData = groupBy(data, 'neighbourhood_cleansed');
     const initRoomTypes = ['Shared room', 'Private room', 'Entire home/apt'];
     const medianPriceData = getMedianData(groupHoodData);
+    const dropdownOptions = Object.keys(groupHoodData).map((hoodName) => {
+      const entry = {value: hoodName, label: hoodName};
+      return entry;
+    });
     this.state = {
       gHoodData: groupHoodData,
+      dropdown: dropdownOptions,
       roomTypes: initRoomTypes,
       priceData: medianPriceData,
-      selectedHood: 'Avondale'
+      selectedHood: 'Avondale',
+      selectedBar: false
     };
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleDataSelect = this.handleDataSelect.bind(this);
+  }
+
+  handleMouseOver(datapoint) {
+    this.setState({
+      selectedBar: datapoint
+    });
+  }
+
+  handleMouseOut() {
+    this.setState({
+      selectedBar: false
+    });
   }
 
   handleDataSelect(dropdownSelect) {
@@ -27,36 +47,41 @@ export default class PriceBar extends Component {
   }
 
   render() {
-    const {gHoodData, roomTypes, priceData, selectedHood} = this.state;
+    const {gHoodData, dropdown, roomTypes, priceData, selectedHood, selectedBar} = this.state;
     const selectedPriceData = formatPriceBarData(priceData[selectedHood]);
-    const dropdownOptions = Object.keys(gHoodData).map((hoodName) => {
-      const entry = {value: hoodName, label: hoodName};
-      return entry;
-    })
-    const colors = {
-      'Entire home/apt': '#FFC2BD',
-      'Private room': '#FFD469',
-      'Shared room': '#61B7B6'};
     return (
       <div>
+        <h2>{selectedHood}: Median Price by Room Type </h2>
         <XYPlot
-          colorType="category"
           xType="ordinal"
           stackBy="y"
-          width={300}
-          height={450}
-          margin={{bottom: 100}}
+          width={400}
+          height={350}
+          margin={{left: 50, right: 50, bottom: 100}}
           >
           <HorizontalGridLines />
           <VerticalBarSeries
-            animation
-            data={selectedPriceData}/>
+            data={selectedPriceData}
+            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
+            onSeriesMouseOut={() => this.handleMouseOut()}/>
+          {selectedBar !== false && <Hint value={selectedBar} className="smallHint">
+            <div>
+              <div className={'hint-text-bold'}>{selectedBar.x}</div>
+              <div className={'hint-text'}>
+                {selectedBar.y}
+              </div>
+            </div>
+          </Hint>}
           <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>
           <YAxis title="Median Price (USD)" style={{fontFamily: 'Montserrat'}}/>
         </XYPlot>
-        <Select
-          options={dropdownOptions}
-          onChange={(hood) => this.handleDataSelect(hood)}/>
+        <div className="dropdown-menu">
+          <Select
+            options={dropdown}
+            isSearchable={true}
+            defaultValue={{label: selectedHood, value: 0}}
+            onChange={(hood) => this.handleDataSelect(hood)}/>
+        </div>
       </div>
     );
   }
