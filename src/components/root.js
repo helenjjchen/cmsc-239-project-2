@@ -54,6 +54,7 @@ class RootComponent extends React.Component {
           }}
         />
         <div className={"text bottom-margin"}>{`The example data was loaded! There are ${data.length} rows`}</div>
+        <h2> Room Types by Neighborhood </h2>
         <div className={"bottom-margin center"}>
           <StackedBar data={data}/>
         </div>
