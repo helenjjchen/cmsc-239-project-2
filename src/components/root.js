@@ -5,7 +5,7 @@ import ExampleChart from './example-chart';
 import StackedBar from './stacked-bar';
 // import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
 import {formatLngLat} from '../utils'; // temporary
-//var HeatmapOverlay = require('react-map-gl-heatmap-overlay');
+// var HeatmapOverlay = require('react-map-gl-heatmap-overlay');
 
 const longBlock = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
