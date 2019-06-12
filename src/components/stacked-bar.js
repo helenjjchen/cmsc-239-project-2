@@ -16,15 +16,22 @@ export default class StackedBar extends Component {
   constructor() {
     super();
     this.state = {
-      selectedHood: false
+      selectedHood: false,
+      selectedRoomData: null
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
   }
 
-  handleMouseOver(datapoint) {
-    console.log(datapoint)
+  handleMouseOver(datapoint, roomData) {
+    const roomTypes = Object.keys(roomData[datapoint.x]);
+    const rData = roomTypes.map(roomType => {
+      const entry = {};
+      entry[roomType] = roomData[datapoint.x][roomType].length;
+      return entry;
+    });
     this.setState({
-      selectedHood: datapoint
+      selectedHood: datapoint,
+      selectedRoomData: rData
     });
   }
 
@@ -33,7 +40,7 @@ export default class StackedBar extends Component {
     // const preppedData = Object.entries(groupBy(data, keyOfInterest)).map(([key, values]) => {
     //   return {key, size: values.length};
     // });
-    const {selectedHood} = this.state;
+    const {selectedHood, selectedRoomData} = this.state;
     const {data} = this.props;
     const gHoodData = groupBy(data, 'neighbourhood_cleansed');
     let items = Object.keys(gHoodData).map(k => {
@@ -48,7 +55,7 @@ export default class StackedBar extends Component {
       const gRmTypeData = groupBy(gHoodData[d[0]], 'room_type');
       roomData[d[0]] = gRmTypeData;
     });
-    const roomTypes = Object.keys(roomData.Avondale);
+    const roomTypes = ['Shared room', 'Private room', 'Entire home/apt'];
     const barsData = roomTypes.reduce((barData, roomType) => {
       barData[roomType] = Object.keys(roomData).map(hood => {
         const roomTypeData = roomData[hood][roomType];
@@ -71,17 +78,25 @@ export default class StackedBar extends Component {
           <HorizontalGridLines />
           <VerticalBarSeries
             data={barsData[roomTypes[0]]}
-            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}/>
+            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint, roomData)}/>
           <VerticalBarSeries
             data={barsData[roomTypes[1]]}
-            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}/>
+            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint, roomData)}/>
           <VerticalBarSeries
             data={barsData[roomTypes[2]]}
-            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}/>
+            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint, roomData)}/>
           {selectedHood !== false && <Hint value={selectedHood}>
             <div>
               <div className={'hint-text'}>{selectedHood.x}</div>
-              <div className={'hint-text'}>{`Wow there are ${selectedHood.y} listings`}</div>
+              {selectedRoomData.map(d => {
+                const roomType = Object.keys(d)[0];
+                const listingCount = Object.values(d)[0];
+                return (
+                  <div className={'hint-text'}>
+                    {`${roomType}: ${listingCount}`}
+                  </div>
+                );
+              })}
             </div>
           </Hint>}
           <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>
