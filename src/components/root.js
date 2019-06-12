@@ -1,10 +1,8 @@
 import React from 'react';
-import ReactMapGL from 'react-map-gl';
 import {csv} from 'd3-fetch';
-import ExampleChart from './example-chart';
 import StackedBar from './stacked-bar';
 import PriceBar from './price-bar';
-// import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
+import AirbnbMap from './map';
 
 const longBlock = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -42,21 +40,11 @@ class RootComponent extends React.Component {
       <div className="relative">
 
         <h1> Airbnb in Chicago </h1>
-        <ReactMapGL
-          width={400}
-          height={400}
-          latitude={41.8781}
-          longitude={-87.6298}
-          zoom={8}
-          mapboxApiAccessToken={'pk.eyJ1IjoiMDAxd3dhbmciLCJhIjoiY2p3cTI3cGR6MWZwZjRhcDhnajliMTZ3ZSJ9.fgblubMtl1JgN31RQUw13A'}
-          onViewportChange={(viewport) => {
-            const {width, height, latitude, longitude, zoom} = viewport;
-            // Optionally call `setState` and use the state to update the map.
-          }}
-        />
         <div className={'text bottom-margin'}>
           {`The example data was loaded! There are ${data.length} rows`}
         </div>
+        <h2>Dope ass map</h2>
+        <AirbnbMap data={data}/>
         <h2> Room Types by Neighborhood </h2>
         <div className={'bottom-margin center'}>
           <StackedBar data={data}/>
