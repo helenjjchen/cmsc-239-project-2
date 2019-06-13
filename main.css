@@ -234,3 +234,7 @@ button {
 button:focus {
   background-color: lightgray;
 }
+
+a {
+  color: #61B7B6;
+}

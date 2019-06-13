@@ -77,16 +77,16 @@ class RootComponent extends React.Component {
         </div>
 
         <h2>Chicago Listings Over Time</h2>
+        <AirbnbMap data={data}/>
         <div className={'bottom-margin-75'}>
-          <AirbnbMap data={data}/>
           <div className={'bottom-margin'}> </div>
           <div className={'flex centered'}>
             <ColoredLine color="#ffc2bd" />
             <p className={'text'}>
-              You climb out of your Uber from O’Hare weary of your surroundings. You exhale and watch as your breath crystallizes in front of you: back in Chicago and right on time for winter. Sighing, you trudge toward the house. <br/> <br/>
-              All you need is a place to rest, but you’ve been tired of hotels for a long time. You open the door to your Airbnb, and you’re greeted with a card - “Bienvenidos a casa.” Last time, at your Airbnb a neighborhood away, you received a “Huānyíng huí jiā.” The time before that, at the place north of downtown, you smiled at a simple “Welcome Home.” <br/> <br/>
-              You head to sleep, and thinking of all the cards you’ve read, you begin to dream questions. How have the number of Airbnb listings in Chicago changed over time? What neighborhood am I in again? Are there a lot of listings here? Is this an expensive neighborhood? Would it have been cheaper to book a different room type? Given the neighborhood, is it expensive to book a relatively well-reviewed home?
-              And, as you dream, you seek answers; you begin to visualize the shape and structure of Airbnb listing data in Chicago; after all, your name is Andrew McNutt.
+              As shown above, Airbnb listings in Chicago have grown exponentially since 2009, a year marking Airbnb’s fresh start out of Y Combinator. In the past decade, Chicago has seen listings grow from a mere two homes to over 7000.  From 2009 to 2015, listings north of downtown dominated growth, with only a sparse handful of listings nearer to the South Side. However, from 2016 to present, we see a trend wherein listings have spread further into Chicago’s famous neighborhoods, expanding outside the confines of the northern suburbs and reaching into communities ripe with ethnic charm and contemporary relevance. Of course, listings continue to consolidate heavily in the downtown and Loop-surrounding areas. Thus, we see that the epicenter of downtown is a powerful market opportunity for Airbnb hosts; tourists are still eager to experience the vibrancy at the heart of the Windy City. <br/><br/>
+              As an interesting note, after explosive growth in 2017, we see a downturn in growth rate for listings for part of 2018 due to regulation from Chicago’s Department of Business Affairs and Consumer Protection which
+              <a href={'https://www.fastcompany.com/90218765/airbnb-regulation-pain-hits-chicago-as-city-threatens-to-reject-1200-hosts'}>required licenses for people renting out rooms for less than 30 days</a>.
+                However, after the initial shock of the legislation and with more corporate support in place, Airbnb listings growth has begun to recover.
             </p>
           </div>
         </div>
@@ -107,7 +107,6 @@ class RootComponent extends React.Component {
         </div>
 
         <PriceBar data={data}/>
-<<<<<<< HEAD
         <div className={'bottom-margin-30'}> </div>
         <div className={'bottom-margin-75'}>
           <div className={'flex centered'}>

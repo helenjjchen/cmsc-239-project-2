@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, MarkSeries} from 'react-vis';
 import {format} from 'd3-format';
-import {groupBy, formatScatterData, formatScatterData2, formatScatterData3, 
+import {groupBy, formatScatterData, formatScatterData2, formatScatterData3,
   getMedReviewForListings, getMaxReviews} from '../utils';
 
 export default class PriceReview extends Component {
@@ -45,11 +45,11 @@ export default class PriceReview extends Component {
     } else if (plotType === 'Min') {
       this.setState({
         data: this.state.minData
-      }); 
+      });
     } else {
       this.setState({
         data: this.state.maxData
-      }); 
+      });
     }
   }
 
@@ -77,8 +77,8 @@ export default class PriceReview extends Component {
                 <div className={'hint-text'}>Mean No. of Reviews: {format('0.2f')(selectedHood.size)}</div>
               </div>
               </Hint>}
-             <XAxis />
-             <YAxis />
+            <XAxis style={{fontFamily: 'Montserrat'}}/>
+            <YAxis title="Median Review Score out of 100" style={{fontFamily: 'Montserrat'}}/>
           </XYPlot>
         </div>
         <div className={'center flex'}>
@@ -88,15 +88,15 @@ export default class PriceReview extends Component {
           </button>
           <button
             onClick={() => this.handleDataSelect('Min')}>
-            Minimum Reviews 
+            Minimum Reviews
           </button>
           <button
             onClick={() => this.handleDataSelect('Maximum')}>
-            Maximum Reviews 
+            Maximum Reviews
           </button>
         </div>
       </div>
     );
-    
+
   }
 }
