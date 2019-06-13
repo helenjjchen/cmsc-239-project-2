@@ -3,6 +3,7 @@ import {csv} from 'd3-fetch';
 import StackedBar from './stacked-bar';
 import PriceBar from './price-bar';
 import PriceReview from './price-review';
+import ExampleChart from './example-chart';
 // import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
 import {formatLngLat} from '../utils'; // temporary
 // var HeatmapOverlay = require('react-map-gl-heatmap-overlay')
@@ -48,8 +49,8 @@ class RootComponent extends React.Component {
       <div className="relative">
 
         <h1> Airbnb in Chicago </h1>
-        <div className={'text bottom-margin'}>
-          {`The example data was loaded! There are ${data.length} rows`}
+        <div className={'subtitle flex center'}>
+          By Helen Chen, William Wang, Jonathan Yuan
         </div>
         <h2>Dope ass map</h2>
         <AirbnbMap data={data}/>
