@@ -58,7 +58,7 @@ export default class PriceBar extends Component {
             stackBy="y"
             width={400}
             height={400}
-            margin={{left: 50, right: 50, bottom: 50}}
+            margin={{left: 50, right: 50, bottom: 30}}
             >
             <HorizontalGridLines />
             <VerticalBarSeries
