@@ -2,6 +2,11 @@ import React from 'react';
 import {csv} from 'd3-fetch';
 import StackedBar from './stacked-bar';
 import PriceBar from './price-bar';
+import PriceReview from './price-review';
+import ExampleChart from './example-chart';
+// import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
+import {formatLngLat} from '../utils'; // temporary
+// var HeatmapOverlay = require('react-map-gl-heatmap-overlay')
 import AirbnbMap from './map';
 import RatingsHist from './ratings-hist';
 
@@ -34,6 +39,9 @@ class RootComponent extends React.Component {
 
   render() {
     const {loading, data} = this.state;
+    // console.log(data);
+    const test = formatLngLat(data);
+    // console.log(test);
     if (loading) {
       return <h1>LOADING</h1>;
     }
@@ -52,6 +60,8 @@ class RootComponent extends React.Component {
         </div>
         <div>{longBlock}</div>
         <PriceBar data={data}/>
+        <ExampleChart data={data}/>
+        <PriceReview data={data}/>
         <RatingsHist data={data}/>
         <div>{longBlock}</div>
         <div className={'bottom-margin-100'}> </div>

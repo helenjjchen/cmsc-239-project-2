@@ -89,6 +89,21 @@ export function formatStackBarData(roomTypes, roomData) {
   return barsData;
 }
 
+// formats data into [{longitude, latitude}] required for HeatMapOverlay
+export function formatLngLat(data) {
+  if (data === null) {
+    return data;
+  }
+  const dataCopy = data.slice(0)
+  const lngLatData = dataCopy.map(row => {
+    const lng = Number(row.longitude);
+    const lat = Number(row.latitude);
+    return {longitude: lng, latitude: lat};
+  });
+  console.log(lngLatData);
+  return lngLatData;
+}
+
 export function formatPriceBarData(hoodPriceData) {
   return Object.keys(hoodPriceData).sort().map((roomType) => {
     const entry = {};
@@ -121,6 +136,14 @@ export function getMedPriceForListings(listings) {
   return median(priceArray);
 }
 
+// gets the median review from an array of listing objects
+export function getMedReviewForListings(listings) {
+  const priceArray = listings.map((listing) => {
+    return Number(listing.review_scores_rating);
+  });
+  return median(priceArray);
+}
+
 // finds median value given an array of values (numbers)
 function median(values) {
   const len = values.length;
@@ -129,4 +152,37 @@ function median(values) {
     return (values[len / 2 - 1] + values[len / 2]) / 2;
   }
   return values[(len - 1) / 2];
+}
+
+// finds mean value given an array of values (numbers)
+function mean(values) {
+  const len = values.length;
+  const ret = values.reduce((acc, value) => {
+    acc += value;
+    return acc;
+  }, 0);
+  return ret / len;
+}
+
+// finds mean # of reviews given a an array of listing objects
+function getMeanReviews(listings) {
+  const reviewArray = listings.map(listing => {
+    return Number(listing.review_scores_rating);
+  });
+  return mean(reviewArray);
+}
+
+// formats scatterplot data given grouped neighborhood dat
+export function formatScatterData(groupHoodData) {
+  if (groupHoodData === null) {
+    return groupHoodData;
+  }
+  const ret = Object.keys(groupHoodData).map(hoodName => {
+    const xMedPrice = getMedPriceForListings(groupHoodData[hoodName]);
+    const yMedReview = getMedReviewForListings(groupHoodData[hoodName]);
+    const sizeMeanReview = getMeanReviews(groupHoodData[hoodName]);
+    return {x: xMedPrice, y: yMedReview, size: sizeMeanReview};
+  });
+  console.log(ret);
+  return ret;
 }
