@@ -18,6 +18,17 @@ voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occa
 non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 `;
 
+const ColoredLine = ({ color }) => (
+  <hr
+    style={{
+      color: color,
+      backgroundColor: color,
+      border: 0,
+      width: 50
+    }}
+  />
+);
+
 class RootComponent extends React.Component {
   constructor() {
     super();
@@ -47,11 +58,21 @@ class RootComponent extends React.Component {
     }
     return (
       <div className="relative">
-
         <h1> Airbnb in Chicago </h1>
         <div className={'subtitle flex center'}>
           By Helen Chen, William Wang, Jonathan Yuan
         </div>
+        <div className={'flex centered'}>
+          <ColoredLine color="#ffc2bd" />
+          <p className={'intro-text'}>
+            You climb out of your Uber from O’Hare weary of your surroundings. You exhale and watch as your breath crystallizes in front of you: back in Chicago and right on time for winter. Sighing, you trudge toward the house. <br/> <br/>
+            All you need is a place to rest, but you’ve been tired of hotels for a long time. You open the door to your Airbnb, and you’re greeted with a card - “Bienvenidos a casa.” Last time, at your Airbnb a neighborhood away, you received a “Huānyíng huí jiā.” The time before that, at the place north of downtown, you smiled at a simple “Welcome Home.” <br/> <br/>
+            You head to sleep, and thinking of all the cards you’ve read, you begin to dream questions. How have the number of Airbnb listings in Chicago changed over time? What neighborhood am I in again? Are there a lot of listings here? Is this an expensive neighborhood? Would it have been cheaper to book a different room type? Given the neighborhood, is it expensive to book a relatively well-reviewed home?
+            And, as you dream, you seek answers; you begin to visualize the shape and structure of Airbnb listing data in Chicago; after all, your name is Andrew McNutt.
+          </p>
+          <ColoredLine color="#ffc2bd" />
+        </div>
+
         <h2>Dope ass map</h2>
         <AirbnbMap data={data}/>
         <h2> Room Types by Neighborhood </h2>
@@ -65,7 +86,7 @@ class RootComponent extends React.Component {
         <PriceReview data={data}/>
         <RatingsHist data={data}/>
         <div>{longBlock}</div>
-        <div className={'bottom-margin-100'}> </div>
+            <div className={'bottom-margin-100'}></div>
       </div>
     );
   }

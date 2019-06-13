@@ -111,7 +111,8 @@ export default class AirbnbMap extends Component {
     });
     return (
       <div>
-        <ReactMapGL
+        <div className={'center flex'}>
+          <ReactMapGL
           width={700}
           height={400}
           latitude={41.8781}
@@ -126,12 +127,13 @@ export default class AirbnbMap extends Component {
           }}
           mapStyle={mapStyle}>
         </ReactMapGL>
-        <div className="dropdown-menu">
-          <Select
-            options={dropdown}
-            isSearchable={true}
-            defaultValue={{label: selectedYear, value: 0}}
-            onChange={(year) => this.handleDataSelect(year)}/>
+          <div className="dropdown-menu">
+            <Select
+              options={dropdown}
+              isSearchable={true}
+              defaultValue={{label: selectedYear, value: 0}}
+              onChange={(year) => this.handleDataSelect(year)}/>
+          </div>
         </div>
       </div>
     );

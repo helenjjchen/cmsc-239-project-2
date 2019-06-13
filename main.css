@@ -12,6 +12,7 @@
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 1px;
+  margin-bottom: 40px;
 }
 
 .max-width-1000 {
@@ -20,6 +21,11 @@
 
 .center {
   justify-content: center;
+}
+
+.centered {
+  justify-content: center;
+  align-content: center;
 }
 
 .container {
@@ -137,7 +143,7 @@ h1 {
   font-size: 48px;
   font-weight: bold;
   vertical-align: top;
-  margin: 30px auto 10px;
+  margin: 30px auto 15px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -157,6 +163,16 @@ h2 {
   font-family: Montserrat;
   font-size: 14px;
 }
+
+.intro-text {
+  color: #000000;
+  font-family: Montserrat-LightItalic;
+  font-size: 18px;
+  line-height: 2;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 
 .hint-text {
   margin-top: 10px;
