@@ -11,6 +11,28 @@ export function groupBy(data, key) {
   }, {});
 }
 
+export function groupByVal(data) {
+  const gHoodData = groupBy(data, 'neighbourhood_cleansed');
+  return Object.keys(gHoodData).reduce((acc, neigh) => {
+    const ent = gHoodData[neigh].reduce((dict, listing) => {
+      if (!dict[Number(listing['review_scores_rating'])]) {
+        dict[Number(listing['review_scores_rating'])] = 0
+      }
+      dict[Number(listing['review_scores_rating'])] += 1;
+      return dict;
+    }, {});
+  acc[neigh] = ent;
+  return acc;
+  }, {});
+}
+
+export function fixDict(dict) {
+  return Object.keys(dict).reduce((newArray, k) => {
+    newArray.push({x0:Number(k) - .4, x: Number(k) + .4, y:dict[k]});
+    return newArray;
+  }, []);
+}
+
 // gets listing counts for a neighbourhood based on specific room type
 export function getListingCountForHood(gHoodData, hood, roomType) {
   const data = groupBy(gHoodData[hood], 'room_type')[roomType];
