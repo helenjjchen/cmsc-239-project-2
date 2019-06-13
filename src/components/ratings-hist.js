@@ -47,7 +47,7 @@ export default class RatingsHist extends Component {
     const selectedHistData = fixDict(gHoodData[selectedHood]);
     return (
       <div>
-        <h2>{selectedHood}: Distribution of Ratings </h2>
+        <h2>Distribution of Ratings — {selectedHood} </h2>
         <div className={'center flex'}>
           <XYPlot
             stackBy="y"
@@ -69,7 +69,7 @@ export default class RatingsHist extends Component {
                 </div>
               </div>
             </Hint>}
-            <XAxis tickLabelAngle={-45} title="Rating out of 100" style={{fontFamily: 'Montserrat'}}/>
+            <XAxis title="Rating out of 100" style={{fontFamily: 'Montserrat'}}/>
             <YAxis style={{fontFamily: 'Montserrat'}}/>
           </XYPlot>
           <div className="dropdown-menu">

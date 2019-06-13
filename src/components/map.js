@@ -2,25 +2,29 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import ReactMapGL from 'react-map-gl';
 import {groupBy} from '../utils';
+import {fromJS} from 'immutable';
 const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiMDAxd3dhbmciLCJhIjoiY2p3cTI3cGR6MWZwZjRhcDhnajliMTZ3ZSJ9.fgblubMtl1JgN31RQUw13A';
 
 export default class AirbnbMap extends Component {
   constructor(props) {
     super(props);
     const {data} = this.props;
-    const groupHoodData = groupBy(data, 'first_year');
-    const locationsData = groupHoodData['2009'].map((listing) => {
-      return {longitude: Number(listing.longitude), latitude: Number(listing.latitude)};
-    });
-    console.log(locationsData)
-    const dropdownOptions = Object.keys(groupHoodData).map((year) => {
+    const initGroupHoodData = groupBy(data, 'first_year');
+    const dropdownOptions = Object.keys(initGroupHoodData).map((year) => {
       const entry = {value: year, label: year};
       return entry;
     });
-
+    const groupHoodData = Object.keys(initGroupHoodData).reduce((formatHData, year) => {
+      formatHData[year] = Object.keys(initGroupHoodData).reduce((entry, yr) => {
+        if (Number(year) >= Number(yr)) {
+          entry = entry.concat(initGroupHoodData[yr]);
+        }
+        return entry;
+      }, []);
+      return formatHData;
+    }, {});
     this.state = {
       gHoodData: groupHoodData,
-      locations: locationsData,
       dropdown: dropdownOptions,
       selectedYear: '2009',
       selectedBar: false
@@ -28,7 +32,6 @@ export default class AirbnbMap extends Component {
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleDataSelect = this.handleDataSelect.bind(this);
-    this.redraw = this.redraw.bind(this);
   }
 
   handleMouseOver(datapoint) {
@@ -49,16 +52,67 @@ export default class AirbnbMap extends Component {
     });
   }
 
-  redraw({project}) {
-    const [cx, cy] = project([-122, 37]);
-    return <circle cx={cx} cy={cy} r={4} fill="blue" />;
-  }
-
   render() {
-    const {gHoodData, locations, dropdown, selectedYear, selectedBar} = this.state;
+    const {gHoodData, dropdown, selectedYear, selectedBar} = this.state;
+    const locationsData = gHoodData[selectedYear].map((listing) => {
+      return {longitude: Number(listing.longitude), latitude: Number(listing.latitude)};
+    });
+    const featuresData = locationsData.map((location) => {
+      const feat = {};
+      feat.type = 'Feature';
+      feat.geometry = {type: 'Point', coordinates: [Number(location.longitude), Number(location.latitude)]};
+      return feat;
+    });
+    const mapStyle = fromJS({
+      version: 8,
+      sources: {
+        points: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: featuresData
+          }
+        },
+        mapboxstreets: {
+          type: 'vector',
+          url: 'mapbox://mapbox.mapbox-streets-v6'
+        }
+      },
+      layers: [
+        {
+          id: 'my-layer',
+          type: 'circle',
+          source: 'points',
+          paint: {
+            'circle-radius': 3,
+            'circle-color': '#F16664',
+            'circle-opacity': 0.6
+          }
+        },
+        {
+          id: 'water',
+          source: 'mapboxstreets',
+          'source-layer': 'water',
+          type: 'fill',
+          paint: {
+            'fill-color': '#61B7B6'
+          }
+        },
+        {
+          id: 'landuse',
+          source: 'mapboxstreets',
+          'source-layer': 'road',
+          type: 'fill',
+          paint: {
+            'fill-color': '#FFD469'
+          }
+        }
+      ]
+    });
     return (
       <div>
-        <ReactMapGL
+        <div className={'center flex'}>
+          <ReactMapGL
           width={700}
           height={400}
           latitude={41.8781}
@@ -70,14 +124,16 @@ export default class AirbnbMap extends Component {
           {...this.state.viewport}
           onViewportChange={(viewport) => {
             this.setState({viewport});
-          }}>
+          }}
+          mapStyle={mapStyle}>
         </ReactMapGL>
-        <div className="dropdown-menu">
-          <Select
-            options={dropdown}
-            isSearchable={true}
-            defaultValue={{label: selectedYear, value: 0}}
-            onChange={(year) => this.handleDataSelect(year)}/>
+          <div className="dropdown-menu">
+            <Select
+              options={dropdown}
+              isSearchable={true}
+              defaultValue={{label: selectedYear, value: 0}}
+              onChange={(year) => this.handleDataSelect(year)}/>
+          </div>
         </div>
       </div>
     );
