@@ -100,7 +100,6 @@ export function formatLngLat(data) {
     const lat = Number(row.latitude);
     return {longitude: lng, latitude: lat};
   });
-  console.log(lngLatData);
   return lngLatData;
 }
 
@@ -183,6 +182,5 @@ export function formatScatterData(groupHoodData) {
     const sizeMeanReview = getMeanReviews(groupHoodData[hoodName]);
     return {x: xMedPrice, y: yMedReview, size: sizeMeanReview, name: hoodName};
   });
-  console.log(ret);
   return ret;
 }
