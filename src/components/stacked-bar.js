@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import {Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-import {getTopHoodsByTotal, groupBy, getRoomDataForHoods, formatBarData, getTopHoodsBy} from '../utils';
+import {getTopHoodsByTotal, groupBy, getRoomDataForHoods, formatStackBarData, getTopHoodsBy} from '../utils';
 
 export default class StackedBar extends Component {
   constructor(props) {
@@ -64,12 +64,8 @@ export default class StackedBar extends Component {
   }
 
   render() {
-    // const {data} = this.props;
-    // const preppedData = Object.entries(groupBy(data, keyOfInterest)).map(([key, values]) => {
-    //   return {key, size: values.length};
-    // });
     const {roomData, roomTypes, selectedHood, selectedRoomData} = this.state;
-    const barsData = formatBarData(roomTypes, roomData);
+    const barsData = formatStackBarData(roomTypes, roomData);
     const colors = {
       'Entire home/apt': '#FFC2BD',
       'Private room': '#FFD469',
@@ -87,6 +83,7 @@ export default class StackedBar extends Component {
           {roomTypes.map((d, i) => {
             return (
               <VerticalBarSeries
+                key={i}
                 animation
                 data={barsData[d]}
                 color={colors[d]}

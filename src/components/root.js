@@ -3,6 +3,8 @@ import ReactMapGL from 'react-map-gl';
 import {csv} from 'd3-fetch';
 import ExampleChart from './example-chart';
 import StackedBar from './stacked-bar';
+import PriceBar from './price-bar';
+import PriceReview from './price-review';
 // import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
 import {formatLngLat} from '../utils'; // temporary
 // var HeatmapOverlay = require('react-map-gl-heatmap-overlay');
@@ -58,13 +60,15 @@ class RootComponent extends React.Component {
             // Optionally call `setState` and use the state to update the map.
           }}
         />
-        <div className={"text bottom-margin"}>{`The example data was loaded! There are ${data.length} rows`}</div>
+        <div className={'text bottom-margin'}>{`The example data was loaded! There are ${data.length} rows`}</div>
         <h2> Room Types by Neighborhood </h2>
-        <div className={"bottom-margin center"}>
+        <div className={'bottom-margin center'}>
           <StackedBar data={data}/>
         </div>
         <div>{longBlock}</div>
+        <PriceBar data={data}/>
         <ExampleChart data={data}/>
+        <PriceReview data={data}/>
         <div>{longBlock}</div>
       </div>
     );
