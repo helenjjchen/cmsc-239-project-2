@@ -107,6 +107,7 @@ class RootComponent extends React.Component {
         </div>
 
         <PriceBar data={data}/>
+<<<<<<< HEAD
         <div className={'bottom-margin-30'}> </div>
         <div className={'bottom-margin-75'}>
           <div className={'flex centered'}>
