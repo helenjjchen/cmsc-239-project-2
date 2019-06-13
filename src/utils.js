@@ -172,6 +172,21 @@ function getMeanReviews(listings) {
   return mean(reviewArray);
 }
 
+function getMinReviews(listings) {
+  const reviewArray = listings.map(listing => {
+    return Number(listing.review_scores_rating);
+  });
+  return Math.min(...reviewArray);
+}
+
+function getMaxReviews(listings) {
+  const reviewArray = listings.map(listing => {
+    return Number(listing.review_scores_rating);
+  });
+  return Math.max(...reviewArray);
+}
+
+
 // formats scatterplot data given grouped neighborhood dat
 export function formatScatterData(groupHoodData) {
   if (groupHoodData === null) {
@@ -180,6 +195,34 @@ export function formatScatterData(groupHoodData) {
   const ret = Object.keys(groupHoodData).map(hoodName => {
     const xMedPrice = getMedPriceForListings(groupHoodData[hoodName]);
     const yMedReview = getMedReviewForListings(groupHoodData[hoodName]);
+    const sizeMeanReview = getMeanReviews(groupHoodData[hoodName]);
+    return {x: xMedPrice, y: yMedReview, size: sizeMeanReview, name: hoodName};
+  });
+  console.log(ret);
+  return ret;
+}
+
+export function formatScatterData2(groupHoodData) {
+  if (groupHoodData === null) {
+    return groupHoodData;
+  }
+  const ret = Object.keys(groupHoodData).map(hoodName => {
+    const xMedPrice = getMedPriceForListings(groupHoodData[hoodName]);
+    const yMedReview = getMinReviews(groupHoodData[hoodName]);
+    const sizeMeanReview = getMeanReviews(groupHoodData[hoodName]);
+    return {x: xMedPrice, y: yMedReview, size: sizeMeanReview, name: hoodName};
+  });
+  console.log(ret);
+  return ret;
+}
+
+export function formatScatterData3(groupHoodData) {
+  if (groupHoodData === null) {
+    return groupHoodData;
+  }
+  const ret = Object.keys(groupHoodData).map(hoodName => {
+    const xMedPrice = getMedPriceForListings(groupHoodData[hoodName]);
+    const yMedReview = getMaxReviews(groupHoodData[hoodName]);
     const sizeMeanReview = getMeanReviews(groupHoodData[hoodName]);
     return {x: xMedPrice, y: yMedReview, size: sizeMeanReview, name: hoodName};
   });
