@@ -57,10 +57,12 @@ export default class PriceReview extends Component {
     const {data, selectedHood} = this.state;
     return (
       <div>
-        <div>
+        <div className={'center flex'}>
           <XYPlot
-            width={800}
-            height={600}>
+            width={900}
+            height={550}
+            margin={{left: 50, right: 50, bottom: 50, top: 10}}>
+
             <HorizontalGridLines />
             <MarkSeries
               className="mark-series-example"
@@ -69,7 +71,7 @@ export default class PriceReview extends Component {
               data={data}
               onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
               onValueMouseOut={() => this.handleMouseOut()}/>
-            {selectedHood !== false && <Hint value={selectedHood}>
+            {selectedHood !== false && <Hint value={selectedHood} className="largeHint">
               <div>
                 <div className={'hint-text-bold'}>{selectedHood.name}</div>
                 <div className={'hint-text'}>Median Price: {selectedHood.x}</div>

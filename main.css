@@ -132,6 +132,18 @@
   width: 190px;
 }
 
+.largeHint {
+  background: lightgray;
+  border-radius: 10px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 10px;
+  padding: 2px;
+  text-transform: uppercase;
+  height: 125px;
+  width: 250px;
+}
+
 .dropdown-menu {
   font-family: Montserrat;
   width: 250px;
