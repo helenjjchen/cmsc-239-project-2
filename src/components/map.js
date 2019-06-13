@@ -9,11 +9,20 @@ export default class AirbnbMap extends Component {
   constructor(props) {
     super(props);
     const {data} = this.props;
-    const groupHoodData = groupBy(data, 'first_year');
-    const dropdownOptions = Object.keys(groupHoodData).map((year) => {
+    const initGroupHoodData = groupBy(data, 'first_year');
+    const dropdownOptions = Object.keys(initGroupHoodData).map((year) => {
       const entry = {value: year, label: year};
       return entry;
     });
+    const groupHoodData = Object.keys(initGroupHoodData).reduce((formatHData, year) => {
+      formatHData[year] = Object.keys(initGroupHoodData).reduce((entry, yr) => {
+        if (Number(year) >= Number(yr)) {
+          entry = entry.concat(initGroupHoodData[yr]);
+        }
+        return entry;
+      }, []);
+      return formatHData;
+    }, {});
     this.state = {
       gHoodData: groupHoodData,
       dropdown: dropdownOptions,
@@ -75,7 +84,7 @@ export default class AirbnbMap extends Component {
           type: 'circle',
           source: 'points',
           paint: {
-            'circle-radius': 4,
+            'circle-radius': 3,
             'circle-color': '#F16664',
             'circle-opacity': 0.6
           }
