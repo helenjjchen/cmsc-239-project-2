@@ -3,6 +3,7 @@ import {csv} from 'd3-fetch';
 import StackedBar from './stacked-bar';
 import PriceBar from './price-bar';
 import PriceReview from './price-review';
+import ExampleChart from './example-chart';
 // import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
 import {formatLngLat} from '../utils'; // temporary
 // var HeatmapOverlay = require('react-map-gl-heatmap-overlay')
