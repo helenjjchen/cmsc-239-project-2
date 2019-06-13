@@ -9,8 +9,9 @@
 .subtitle {
   color: black;
   font-family: Montserrat;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
+  letter-spacing: 1px;
 }
 
 .max-width-1000 {
@@ -136,7 +137,7 @@ h1 {
   font-size: 48px;
   font-weight: bold;
   vertical-align: top;
-  margin: 30px auto 80px;
+  margin: 30px auto 10px;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
