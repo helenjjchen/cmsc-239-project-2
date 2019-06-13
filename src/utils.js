@@ -181,7 +181,7 @@ export function formatScatterData(groupHoodData) {
     const xMedPrice = getMedPriceForListings(groupHoodData[hoodName]);
     const yMedReview = getMedReviewForListings(groupHoodData[hoodName]);
     const sizeMeanReview = getMeanReviews(groupHoodData[hoodName]);
-    return {x: xMedPrice, y: yMedReview, size: sizeMeanReview};
+    return {x: xMedPrice, y: yMedReview, size: sizeMeanReview, name: hoodName};
   });
   console.log(ret);
   return ret;

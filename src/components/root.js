@@ -61,6 +61,7 @@ class RootComponent extends React.Component {
         <div>{longBlock}</div>
         <PriceBar data={data}/>
         <ExampleChart data={data}/>
+        <h2> Median Price versus Review </h2>
         <PriceReview data={data}/>
         <RatingsHist data={data}/>
         <div>{longBlock}</div>
