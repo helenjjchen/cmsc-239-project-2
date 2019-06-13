@@ -18,7 +18,6 @@
 }
 
 .center {
-  align-items: center;
   justify-content: center;
 }
 
@@ -114,8 +113,21 @@
   width: 175px;
 }
 
+.medHint {
+  background: lightgray;
+  border-radius: 10px;
+  color: white;
+  font-family: Montserrat;
+  font-size: 10px;
+  padding: 2px;
+  text-transform: uppercase;
+  height: 75px;
+  width: 190px;
+}
+
 .dropdown-menu {
   font-family: Montserrat;
+  width: 250px;
 }
 
 h1 {
@@ -161,12 +173,38 @@ h2 {
   font-size: 14px;
 }
 
+.margin-left-20 {
+  margin-left: 20%;
+}
+
+.margin-left-10 {
+  margin-left: 10%;
+}
+
 div {
-  margin-left: 5%;
+  margin-left: 2.5%;
   max-width: 100%;
-  margin-right: 5%;
+  margin-right: 2.5%;
 }
 
 .bottom-margin {
   margin-bottom: 50px;
+}
+
+.bottom-margin-100 {
+  margin-bottom: 100px;
+}
+
+button {
+  font-family: Montserrat;
+  padding: 5px 15px;
+  text-align: center;
+  margin: 10px;
+  background-color: white;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+button:focus {
+  background-color: lightgray;
 }

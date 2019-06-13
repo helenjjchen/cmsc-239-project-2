@@ -51,37 +51,39 @@ export default class PriceBar extends Component {
     const selectedPriceData = formatPriceBarData(priceData[selectedHood]);
     return (
       <div>
-        <h2>{selectedHood}: Median Price by Room Type </h2>
-        <XYPlot
-          xType="ordinal"
-          stackBy="y"
-          width={400}
-          height={350}
-          margin={{left: 50, right: 50, bottom: 100}}
-          >
-          <HorizontalGridLines />
-          <VerticalBarSeries
-            animation
-            data={selectedPriceData}
-            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
-            onSeriesMouseOut={() => this.handleMouseOut()}/>
-          {selectedBar !== false && <Hint value={selectedBar} className="smallHint">
-            <div>
-              <div className={'hint-text-bold'}>{selectedBar.x}</div>
-              <div className={'hint-text'}>
-                {selectedBar.y}
+        <h2> Median Price by Room Type — {selectedHood} </h2>
+        <div className={'center flex'}>
+          <XYPlot
+            xType="ordinal"
+            stackBy="y"
+            width={400}
+            height={400}
+            margin={{left: 50, right: 50, bottom: 50}}
+            >
+            <HorizontalGridLines />
+            <VerticalBarSeries
+              animation
+              data={selectedPriceData}
+              onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
+              onSeriesMouseOut={() => this.handleMouseOut()}/>
+            {selectedBar !== false && <Hint value={selectedBar} className="smallHint">
+              <div>
+                <div className={'hint-text-bold'}>{selectedBar.x}</div>
+                <div className={'hint-text'}>
+                  {selectedBar.y}
+                </div>
               </div>
-            </div>
-          </Hint>}
-          <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>
-          <YAxis title="Median Price (USD)" style={{fontFamily: 'Montserrat'}}/>
-        </XYPlot>
-        <div className="dropdown-menu">
-          <Select
-            options={dropdown}
-            isSearchable={true}
-            defaultValue={{label: selectedHood, value: 0}}
-            onChange={(hood) => this.handleDataSelect(hood)}/>
+            </Hint>}
+            <XAxis style={{fontFamily: 'Montserrat'}}/>
+            <YAxis title="Median Price (USD)" style={{fontFamily: 'Montserrat'}}/>
+          </XYPlot>
+          <div className="dropdown-menu">
+            <Select
+              options={dropdown}
+              isSearchable={true}
+              defaultValue={{label: selectedHood, value: 0}}
+              onChange={(hood) => this.handleDataSelect(hood)}/>
+          </div>
         </div>
       </div>
     );

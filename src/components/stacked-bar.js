@@ -72,58 +72,62 @@ export default class StackedBar extends Component {
       'Shared room': '#61B7B6'};
     return (
       <div>
-        <XYPlot
-          xType="ordinal"
-          stackBy="y"
-          width={800}
-          height={600}
-          margin={{bottom: 100}}
-          >
-          <HorizontalGridLines />
-          {roomTypes.map((d, i) => {
-            return (
-              <VerticalBarSeries
-                key={i}
-                animation
-                data={barsData[d]}
-                color={colors[d]}
-                onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint, roomData)}
-                onValueMouseOut={() => this.handleMouseOut()}/>
-            );
-          })}
-          {selectedHood !== false && <Hint value={selectedHood}>
-            <div>
-              <div className={'hint-text-bold'}>{selectedHood.x}</div>
-              {selectedRoomData.map(d => {
-                const roomType = Object.keys(d)[0];
-                const listingCount = Object.values(d)[0];
-                return (
-                  <div className={'hint-text'} key={roomType + listingCount}>
-                    {`${roomType}: ${listingCount}`}
-                  </div>
-                );
-              })}
-            </div>
-          </Hint>}
-          <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>
-          <YAxis style={{fontFamily: 'Montserrat'}}/>
-        </XYPlot>
-        <button
-          onClick={() => this.handleDataSelect('default')}>
-          Default
-        </button>
-        <button
-          onClick={() => this.handleDataSelect('Entire home/apt')}>
-          By Entire Home/Apt
-        </button>
-        <button
-          onClick={() => this.handleDataSelect('Private room')}>
-          By Private Room
-        </button>
-        <button
-          onClick={() => this.handleDataSelect('Shared room')}>
-          By Shared Room
-        </button>
+        <div className={'center flex'}>
+          <XYPlot
+            xType="ordinal"
+            stackBy="y"
+            width={800}
+            height={550}
+            margin={{bottom: 110}}
+            >
+            <HorizontalGridLines />
+            {roomTypes.map((d, i) => {
+              return (
+                <VerticalBarSeries
+                  key={i}
+                  animation
+                  data={barsData[d]}
+                  color={colors[d]}
+                  onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint, roomData)}
+                  onValueMouseOut={() => this.handleMouseOut()}/>
+              );
+            })}
+            {selectedHood !== false && <Hint value={selectedHood}>
+              <div>
+                <div className={'hint-text-bold'}>{selectedHood.x}</div>
+                {selectedRoomData.map(d => {
+                  const roomType = Object.keys(d)[0];
+                  const listingCount = Object.values(d)[0];
+                  return (
+                    <div className={'hint-text'} key={roomType + listingCount}>
+                      {`${roomType}: ${listingCount}`}
+                    </div>
+                  );
+                })}
+              </div>
+            </Hint>}
+            <XAxis tickLabelAngle={-45} style={{fontFamily: 'Montserrat'}}/>
+            <YAxis style={{fontFamily: 'Montserrat'}}/>
+          </XYPlot>
+        </div>
+        <div className={'center flex'}>
+          <button
+            onClick={() => this.handleDataSelect('default')}>
+            Default
+          </button>
+          <button
+            onClick={() => this.handleDataSelect('Entire home/apt')}>
+            By Entire Home/Apt
+          </button>
+          <button
+            onClick={() => this.handleDataSelect('Private room')}>
+            By Private Room
+          </button>
+          <button
+            onClick={() => this.handleDataSelect('Shared room')}>
+            By Shared Room
+          </button>
+        </div>
       </div>
     );
   }

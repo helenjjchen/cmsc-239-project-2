@@ -47,36 +47,38 @@ export default class RatingsHist extends Component {
     const selectedHistData = fixDict(gHoodData[selectedHood]);
     return (
       <div>
-        <h2>{selectedHood}: Distribution of ratings </h2>
-        <XYPlot
-          stackBy="y"
-          width={800}
-          height={450}
-          margin={{bottom: 100}}
-        >
-          <HorizontalGridLines />
-          <VerticalRectSeries
-            animation
-            data={selectedHistData}
-            onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
-            onSeriesMouseOut={() => this.handleMouseOut()}/>
-          {selectedBar !== false && <Hint value={selectedBar} className="smallHint">
-            <div>
-              <div className={'hint-text-bold'}>{selectedBar.x}</div>
-              <div className={'hint-text'}>
-                {selectedBar.y}
+        <h2>{selectedHood}: Distribution of Ratings </h2>
+        <div className={'center flex'}>
+          <XYPlot
+            stackBy="y"
+            width={700}
+            height={450}
+            margin={{bottom: 70}}
+          >
+            <HorizontalGridLines />
+            <VerticalRectSeries
+              animation
+              data={selectedHistData}
+              onValueMouseOver={(datapoint, e) => this.handleMouseOver(datapoint)}
+              onSeriesMouseOut={() => this.handleMouseOut()}/>
+            {selectedBar !== false && <Hint value={selectedBar} className="medHint">
+              <div>
+                <div className={'hint-text-bold'}>{`listings rated ${selectedBar.x -.4}`}</div>
+                <div className={'hint-text'}>
+                  {selectedBar.y}
+                </div>
               </div>
-            </div>
-          </Hint>}
-          <XAxis tickLabelAngle={-45} title="Rating out of 100" style={{fontFamily: 'Montserrat'}}/>
-          <YAxis style={{fontFamily: 'Montserrat'}}/>
-        </XYPlot>
-        <div className="dropdown-menu">
-          <Select
-            options={dropdown}
-            isSearchable={true}
-            defaultValue={{label: selectedHood, value: 0}}
-            onChange={(hood) => this.handleDataSelect(hood)}/>
+            </Hint>}
+            <XAxis tickLabelAngle={-45} title="Rating out of 100" style={{fontFamily: 'Montserrat'}}/>
+            <YAxis style={{fontFamily: 'Montserrat'}}/>
+          </XYPlot>
+          <div className="dropdown-menu">
+            <Select
+              options={dropdown}
+              isSearchable={true}
+              defaultValue={{label: selectedHood, value: 0}}
+              onChange={(hood) => this.handleDataSelect(hood)}/>
+          </div>
         </div>
       </div>
     );

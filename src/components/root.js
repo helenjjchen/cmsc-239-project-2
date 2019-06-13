@@ -54,6 +54,7 @@ class RootComponent extends React.Component {
         <PriceBar data={data}/>
         <RatingsHist data={data}/>
         <div>{longBlock}</div>
+        <div className={'bottom-margin-100'}> </div>
       </div>
     );
   }
