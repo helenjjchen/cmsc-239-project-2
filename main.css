@@ -12,7 +12,20 @@
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 1px;
+  line-height: 2;
   margin-bottom: 40px;
+  text-align: center;
+}
+
+.subtitle1 {
+  color: black;
+  font-family: Montserrat;
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 2;
+  margin-bottom: 40px;
+  text-align: center;
 }
 
 .max-width-1000 {
@@ -231,6 +244,14 @@ div {
 
 .bottom-margin-75 {
   margin-bottom: 65px;
+}
+
+.bottom-margin-100 {
+  margin-bottom: 100px;
+}
+
+.bottom-margin-50 {
+  margin-bottom: 50px;
 }
 
 button {

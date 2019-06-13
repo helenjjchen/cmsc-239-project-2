@@ -76,6 +76,17 @@ class RootComponent extends React.Component {
 
         </div>
 
+        <div>
+          <div>
+            <div className={'subtitle1 flex center'}>
+              “Belong anywhere” is Airbnb’s mission-inspiring slogan. And Chicago, an eclectic mix of vibrant neighborhoods and diverse backgrounds, is the perfect testing ground for it. This article explores Chicago Airbnb listings data from 2009 to 2019.
+            </div>
+          </div>
+        </div>
+
+        <div className={'bottom-margin-100'}> </div>
+
+
         <h2>Chicago Listings Over Time</h2>
         <AirbnbMap data={data}/>
         <div className={'bottom-margin-75'}>
@@ -97,10 +108,8 @@ class RootComponent extends React.Component {
           <div className={'flex centered'}>
             <ColoredLine color="#ffc2bd" />
             <p className={'text'}>
-              You climb out of your Uber from O’Hare weary of your surroundings. You exhale and watch as your breath crystallizes in front of you: back in Chicago and right on time for winter. Sighing, you trudge toward the house. <br/> <br/>
-              All you need is a place to rest, but you’ve been tired of hotels for a long time. You open the door to your Airbnb, and you’re greeted with a card - “Bienvenidos a casa.” Last time, at your Airbnb a neighborhood away, you received a “Huānyíng huí jiā.” The time before that, at the place north of downtown, you smiled at a simple “Welcome Home.” <br/> <br/>
-              You head to sleep, and thinking of all the cards you’ve read, you begin to dream questions. How have the number of Airbnb listings in Chicago changed over time? What neighborhood am I in again? Are there a lot of listings here? Is this an expensive neighborhood? Would it have been cheaper to book a different room type? Given the neighborhood, is it expensive to book a relatively well-reviewed home?
-              And, as you dream, you seek answers; you begin to visualize the shape and structure of Airbnb listing data in Chicago; after all, your name is Andrew McNutt.
+              This visualization shows the distribution of total listings for the top 20 neighbourhoods (ranked by total number of listings). With the default option, it is possible to not only see which neighborhoods have the most listings, but also what the breakdown of listings are by room type. West Town, an area of Chicago originally part of the city’s Polish Downtown, dominates Chicago as the area with the highest total number of listings. Located north of downtown, West Town includes areas such as Wicker Park which has been praised for a vibrant nightlife, quirky shops, and trendy restaurants. As the kids say, West Town best town! <br/><br/>
+              Things change dramatically when the visualization is set to show distribution based on shared room listings only. Englewood, an area only minutes away from Hyde Park, dominates the shared room listings space. This is particularly interesting considering Englewood’s historical reputation as one of Chicago’s <a href="https://wgntv.com/2013/08/25/its-englewood-12-hours-in-one-of-chicagos-most-dangerous-neighborhoods/">most dangerous neighbourhoods</a>. Are Airbnb travellers attracted by the economical price? The opportunity to see a raw, less-glamorized side of Chicago? Regardless, this data is an interesting signal as to Airbnb’s impressive ability to generate markets out of the seemingly impossible.
             </p>
           </div>
         </div>
@@ -124,22 +133,20 @@ class RootComponent extends React.Component {
           <div className={'flex centered'}>
             <ColoredLine color="#ffc2bd" />
             <p className={'text'}>
-              The visualization shows the median price for each room type (entire house/apartment, private room, shared room) for a particular neighborhood. The general trend is as expected. Renting an entire home is generally more expensive than renting a private room which in turn is more expensive than renting a shared room. However, there are a few interesting neighbourhoods to view. For instance, even looking at Lake View’s graph is enough to freeze one’s bank account. With a median price of over $1000/night to book an entire house, one might be better served saving for a year and buying their own home. But, with that said, the experience is always priceless. <br/><br/>
-              Interestingly enough, the median price for a private room in Hyde Park is more than the median price for an entire home/apartment! Perhaps over a century of deep economic thought has put a spin on the economic dynamics within Hyde Park. This odd trend is also present in cities like Portage Park, Kenwood, and Rogers Park. In fact, in Humboldt Park, the median shared room price is higher than either of the other room types, though all three are relatively cheap. It seems that for places like Humboldt Park company is priceless as well.
+              This visualization shows the relationship between Airbnb Price per  neighborhood in Chicago and reviews for the neighborhood, summarized by median, max,  and minimum reviews. The average number of reviews in each neighborhood is encoded with size. It does seem that in generally wealthier and more populated neighborhoods, tenant satisfaction (measured through median reviews) is higher. At higher price levels, variance amongst reviews is lower, suggesting perhaps that higher price level customers are more picky, but generally satisfied with their quality of stay in Chicago Airbnbs. <br/><br/>
+              On the other hand, lower price level tenants seem to have a mixed rate of satisfaction. Indeed, many neighborhoods in Chicago are quite diverse, and cheaper residential options may either exist in some of the poorer, lower income neighborhoods, or one of the neighborhoods farther from the loop. A great example of this is Roseland, a poorer community in Far South Side several miles from the loop with a median review rating of 81, by far the lowest out of any neighborhood. Clearing (located still very far from the loop but next to Midway Airport), on the other hand, has a similar price level but much higher median rating. Controlling for price levels, it is interesting to see how living options amongst different Chicago neighborhoods are perceived by tenants, especially since Chicago hosts such a wide variety of neighborhoods in a very small relative region of space.
+
             </p>
           </div>
         </div>
 
 
           <RatingsHist data={data}/>
-        <div className={'bottom-margin-75'}>
+        <div className={'bottom-margin'}>
           <div className={'flex centered'}>
             <ColoredLine color="#ffc2bd" />
             <p className={'text'}>
-              You climb out of your Uber from O’Hare weary of your surroundings. You exhale and watch as your breath crystallizes in front of you: back in Chicago and right on time for winter. Sighing, you trudge toward the house. <br/> <br/>
-              All you need is a place to rest, but you’ve been tired of hotels for a long time. You open the door to your Airbnb, and you’re greeted with a card - “Bienvenidos a casa.” Last time, at your Airbnb a neighborhood away, you received a “Huānyíng huí jiā.” The time before that, at the place north of downtown, you smiled at a simple “Welcome Home.” <br/> <br/>
-              You head to sleep, and thinking of all the cards you’ve read, you begin to dream questions. How have the number of Airbnb listings in Chicago changed over time? What neighborhood am I in again? Are there a lot of listings here? Is this an expensive neighborhood? Would it have been cheaper to book a different room type? Given the neighborhood, is it expensive to book a relatively well-reviewed home?
-              And, as you dream, you seek answers; you begin to visualize the shape and structure of Airbnb listing data in Chicago; after all, your name is Andrew McNutt.
+              Inspecting the different distribution shapes between neighborhoods allows an even deeper dive into the general residential satisfaction per neighborhood. For example, compare Hyde Park and Lincoln Park’s distributions. While both have similar strongly left skewed shapes, Lincoln Park has a much more consistent level of customer satisfaction when compared to Hyde Park. This gives us good insight as to what the communities are like: both have similar levels of Airbnb listings, but Lincoln Park is a much richer neighborhood that people prefer to live in, compared to Hyde Park, located on the South Side and home to many university students.
             </p>
           </div>
         </div>
@@ -152,7 +159,7 @@ class RootComponent extends React.Component {
 
 
         </div>
-        <div className={'bottom-margin-100'}> </div>
+        <div className={'bottom-margin-75'}> </div>
       </div>
     );
   }
