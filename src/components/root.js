@@ -2,15 +2,12 @@ import React from 'react';
 import {csv} from 'd3-fetch';
 import StackedBar from './stacked-bar';
 import PriceBar from './price-bar';
-<<<<<<< HEAD
 import PriceReview from './price-review';
 // import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries} from 'react-vis';
 import {formatLngLat} from '../utils'; // temporary
-// var HeatmapOverlay = require('react-map-gl-heatmap-overlay');
-=======
+// var HeatmapOverlay = require('react-map-gl-heatmap-overlay')
 import AirbnbMap from './map';
 import RatingsHist from './ratings-hist';
->>>>>>> 6dddf9fddb7ce184ab3215dc74839d653d092028
 
 const longBlock = `
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
