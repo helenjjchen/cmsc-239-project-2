@@ -1,31 +1,34 @@
 import React, {Component} from 'react';
-import ReactMapGL from 'react-map-gl';
-import {Hint, XYPlot, XAxis, YAxis, HorizontalGridLines, VerticalBarSeries} from 'react-vis';
-import {groupBy, formatPriceBarData, getMedianData} from '../utils';
 import Select from 'react-select';
+import ReactMapGL from 'react-map-gl';
+import {groupBy} from '../utils';
+const REACT_APP_MAPBOX_TOKEN = 'pk.eyJ1IjoiMDAxd3dhbmciLCJhIjoiY2p3cTI3cGR6MWZwZjRhcDhnajliMTZ3ZSJ9.fgblubMtl1JgN31RQUw13A';
 
 export default class AirbnbMap extends Component {
   constructor(props) {
     super(props);
     const {data} = this.props;
-    const groupHoodData = groupBy(data, 'neighbourhood_cleansed');
-    const initRoomTypes = ['Shared room', 'Private room', 'Entire home/apt'];
-    const medianPriceData = getMedianData(groupHoodData);
-    const dropdownOptions = Object.keys(groupHoodData).map((hoodName) => {
-      const entry = {value: hoodName, label: hoodName};
+    const groupHoodData = groupBy(data, 'first_year');
+    const locationsData = groupHoodData['2009'].map((listing) => {
+      return {longitude: Number(listing.longitude), latitude: Number(listing.latitude)};
+    });
+    console.log(locationsData)
+    const dropdownOptions = Object.keys(groupHoodData).map((year) => {
+      const entry = {value: year, label: year};
       return entry;
     });
+
     this.state = {
       gHoodData: groupHoodData,
+      locations: locationsData,
       dropdown: dropdownOptions,
-      roomTypes: initRoomTypes,
-      priceData: medianPriceData,
-      selectedHood: 'Avondale',
+      selectedYear: '2009',
       selectedBar: false
     };
     this.handleMouseOver = this.handleMouseOver.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
     this.handleDataSelect = this.handleDataSelect.bind(this);
+    this.redraw = this.redraw.bind(this);
   }
 
   handleMouseOver(datapoint) {
@@ -42,27 +45,40 @@ export default class AirbnbMap extends Component {
 
   handleDataSelect(dropdownSelect) {
     this.setState({
-      selectedHood: dropdownSelect.value
+      selectedYear: dropdownSelect.value
     });
   }
 
+  redraw({project}) {
+    const [cx, cy] = project([-122, 37]);
+    return <circle cx={cx} cy={cy} r={4} fill="blue" />;
+  }
+
   render() {
-    const {gHoodData, dropdown, roomTypes, priceData, selectedHood, selectedBar} = this.state;
-    const selectedPriceData = formatPriceBarData(priceData[selectedHood]);
+    const {gHoodData, locations, dropdown, selectedYear, selectedBar} = this.state;
     return (
       <div>
         <ReactMapGL
-          width={400}
+          width={700}
           height={400}
           latitude={41.8781}
           longitude={-87.6298}
-          zoom={8}
-          mapboxApiAccessToken={'pk.eyJ1IjoiMDAxd3dhbmciLCJhIjoiY2p3cTI3cGR6MWZwZjRhcDhnajliMTZ3ZSJ9.fgblubMtl1JgN31RQUw13A'}
+          zoom={10}
+          minZoom={9}
+          maxZoom={12}
+          mapboxApiAccessToken={REACT_APP_MAPBOX_TOKEN}
+          {...this.state.viewport}
           onViewportChange={(viewport) => {
-            const {width, height, latitude, longitude, zoom} = viewport;
-            // Optionally call `setState` and use the state to update the map.
-          }}
-        />
+            this.setState({viewport});
+          }}>
+        </ReactMapGL>
+        <div className="dropdown-menu">
+          <Select
+            options={dropdown}
+            isSearchable={true}
+            defaultValue={{label: selectedYear, value: 0}}
+            onChange={(year) => this.handleDataSelect(year)}/>
+        </div>
       </div>
     );
   }

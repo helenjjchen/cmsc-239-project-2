@@ -59,7 +59,6 @@ class RootComponent extends React.Component {
         </div>
         <div>{longBlock}</div>
         <PriceBar data={data}/>
-        <ExampleChart data={data}/>
         <PriceReview data={data}/>
         <RatingsHist data={data}/>
         <div>{longBlock}</div>
